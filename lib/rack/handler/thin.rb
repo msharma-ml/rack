@@ -5,7 +5,8 @@ require "rack/chunked"
 module Rack
   module Handler
     class Thin
-      def self.run(app, options={})
+      def self.run(app, options = {}, **kwargs)
+        options.merge!(kwargs)
         server = ::Thin::Server.new(options[:Host] || '0.0.0.0',
                                     options[:Port] || 8080,
                                     app)
